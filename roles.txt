@@ -1,0 +1,16 @@
+user: {userid: 213, username: 'poutsas', email: 'mail', 'password', "**", 'roleid': 2, 'dateCreated': '2020/5/12'}
+added roleid, dateCreated
+
+role: {'roleName': 'admin', 'roleid': 2, 'permissions': []}
+
+persmission: {
+
+}
+entity: "siteroles"
+permission_name: "Full Access Site Roles"
+permissionid: 6
+vars: Object
+canCreate: (...)
+canDelete: (...)
+canUpdate: (...)
+canView: (...)
