@@ -2,8 +2,6 @@ import React, {useState} from 'react';
 import {useNavigation} from '@react-navigation/core';
 import {Image, Text, TextInput, TouchableOpacity, View} from 'react-native';
 import Icon from 'react-native-vector-icons/AntDesign';
-import { handleLogin } from '../../../firebase';
-// import { AdminContext } from '../../contexts/AdminContext';
 
 import styles from '../../styles/Styles';
 
