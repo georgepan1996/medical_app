@@ -1,11 +1,11 @@
-import { StyleSheet } from 'react-native';
+import { StyleSheet, Platform } from 'react-native';
 
 export default StyleSheet.create({
   //login
   loginContainer: {
     height: '100%',
     borderStyle: 'solid',
-    borderColor: '#CC4D08'
+    borderColor: '#CC4D08',
   },
   loginHeader: {
     height: '35%',
@@ -14,13 +14,13 @@ export default StyleSheet.create({
     justifyContent: 'flex-end',
     alignItems: 'center',
     backgroundColor: '#F9F9FB',
-    padding: 10
+    padding: 10,
   },
   loginLogo: {
     width: 130,
     height: 130,
     borderRadius: 100,
-    margin: 10
+    margin: 10,
   },
   loginLogoText: {
     fontWeight: '500',
@@ -29,26 +29,26 @@ export default StyleSheet.create({
     textAlign: 'center',
     fontStyle: 'italic',
     textShadowColor: 'rgba(0, 0, 0, 0.75)',
-    textShadowOffset: {width: 0, height: 2},
-    textShadowRadius: 5
+    textShadowOffset: { width: 0, height: 2 },
+    textShadowRadius: 5,
   },
   loginHeaderText: {
     fontWeight: '500',
     fontSize: 15,
-    fontFamily: 'sans-serif',
+    fontFamily: Platform.OS === 'ios' ? 'Helvetica Neue' : 'sans-serif',
     textAlign: 'center',
     fontStyle: 'italic',
     paddingLeft: 60,
     paddingRight: 60,
     // color: '#95D7F1'
-    color: '#0C528E'
+    color: '#0C528E',
   },
   loginSection: {
     backgroundColor: 'white',
     height: '55%',
   },
   loginTabs: {
-    backgroundColor: '#95D7F1'
+    backgroundColor: '#95D7F1',
   },
   loginFooter: {
     display: 'flex',
@@ -73,7 +73,7 @@ export default StyleSheet.create({
     borderRadius: 5,
     borderColor: '#0C528E',
     padding: 8,
-    margin: 12
+    margin: 12,
   },
   userSubmitButton: {
     backgroundColor: '#0C528E',
@@ -82,7 +82,6 @@ export default StyleSheet.create({
     marginLeft: 25,
     marginRight: 25,
     borderRadius: 15,
-
   },
   //other cases
   onlyTextButton: {
@@ -98,27 +97,26 @@ export default StyleSheet.create({
   shadowText: {
     color: 'black',
     textShadowColor: 'rgba(0, 0, 0, 0.5)',
-    textShadowOffset: {width: 0, height: 0.5},
-    textShadowRadius: 2
+    textShadowOffset: { width: 0, height: 0.5 },
+    textShadowRadius: 2,
   },
   userSubmitButtonText: {
     color: 'white',
     textTransform: 'uppercase',
-    fontSize: 15
+    fontSize: 15,
   },
   beforeFooterTextContainer: {
-    marginTop: 'auto'
+    marginTop: 'auto',
   },
   beforeFooterText: {
     fontWeight: 'bold',
-    fontFamily: 'notoserif',
+    fontFamily: Platform.OS === 'ios' ? 'Helvetica Neue' : 'notoserif',
     textTransform: 'uppercase',
     textAlign: 'center',
     position: 'relative',
-    bottom: 0
+    bottom: 0,
   },
   //login footer
-
 
   container: {
     flex: 1,
