@@ -3,6 +3,8 @@ import { createNativeStackNavigator } from '@react-navigation/native-stack';
 
 import LoginScreen from '../screens/LoginScreen';
 import SignUpScreen from '../screens/SignUpScreen';
+//for now in order to have directly home screen in order to design it
+import HomeScreen from "../screens/HomeScreen";
 
 const NotLoggedStack = () => {
   const Stack = createNativeStackNavigator();
@@ -11,7 +13,7 @@ const NotLoggedStack = () => {
     <Stack.Navigator>
       <Stack.Screen
         name='Login'
-        component={LoginScreen}
+        component={HomeScreen}
         options={{ headerShown: false }}
       />
       <Stack.Screen

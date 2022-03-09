@@ -37,22 +37,15 @@ const HomeScreen = () => {
           size='large'
           visible={loading}
           textContent={'Loading...'}
-          textStyle={styles.spinnerTextStyle}
         />
       ) : (
-        <Text>Email: {data.email}</Text>
+        <View>
+            <View>
+              <Text>jhgh</Text>
+              <Text>jhgh</Text>
+            </View>
+        </View>
       )}
-      {data.roleId === 1 ? <Text>Admin text</Text> : null}
-      {Object.entries(perms).map(([key, v]) => {
-        return (
-          <Text key={key}>
-            {key}: {v ? 'true' : 'false'}
-          </Text>
-        );
-      })}
-      <TouchableOpacity onPress={handleSignOut} style={styles.button}>
-        <Text style={styles.buttonText}>Sign out</Text>
-      </TouchableOpacity>
     </View>
   );
 };

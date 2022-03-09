@@ -2,6 +2,7 @@ import React, {useState} from 'react';
 import {useNavigation} from '@react-navigation/core';
 import {Image, Text, TextInput, TouchableOpacity, View} from 'react-native';
 import Icon from 'react-native-vector-icons/AntDesign';
+import {handleLogin} from '../../../firebase.js'
 
 import styles from '../../styles/Styles';
 
@@ -38,6 +39,7 @@ const LoginScreen = () => {
           </View>
           <TouchableOpacity
               style={styles.userSubmitButton}
+              onPress={() => handleLogin('admin@admin.com', '12345678')}
           >
             <Text style={styles.userSubmitButtonText}>Login</Text>
           </TouchableOpacity>
