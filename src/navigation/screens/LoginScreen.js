@@ -1,82 +1,93 @@
-import React, {useState} from 'react';
-import {useNavigation} from '@react-navigation/core';
-import {Image, Text, TextInput, TouchableOpacity, View} from 'react-native';
+import React, { useState } from 'react';
+import { useNavigation } from '@react-navigation/core';
 import Icon from 'react-native-vector-icons/AntDesign';
+import { View, Text, TextInput, TouchableOpacity } from 'react-native';
+import SVGComponent from '../../../assets/svgs/loginScreen/TopSvgBlue.js';
+import styles from '../../styles/StylesLogInScreen';
 import { handleLogin } from '../../../firebase';
-// import { AdminContext } from '../../contexts/AdminContext';
 
-import styles from '../../styles/Styles';
-
-const LoginScreen = () => {
+export default function ScreenOne() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const navigation = useNavigation();
 
   return (
-      <View style={styles.loginContainer}>
-        <View style={styles.loginHeader}>
-          <Image
-              style={styles.loginLogo}
-              source={require('../../../assets/skincare-logo-face-drop.jpg')}
-          >
-          </Image>
-          <Text style={styles.loginHeaderText}>
-            Stay informed about your skin's protection any time!
-          </Text>
+    <View style={styles.container}>
+      <View style={styles.topHeader} />
+      <SVGComponent style={styles.svgg} />
+      <View style={styles.headerContainer}>
+        <Text style={styles.headerText}>Medical app</Text>
+      </View>
+      <View style={styles.loginSection}>
+        <View style={styles.userConnectionInputs}>
+          <TextInput
+            placeholder='Email'
+            style={styles.userInfoInput}
+            value={email}
+            autoCapitalize='none'
+            keyboardType='email-address'
+            autoCorrect={false}
+            onChangeText={(text) => setEmail(text)}
+          ></TextInput>
+          <TextInput
+            placeholder='Password'
+            style={styles.userInfoInput}
+            value={password}
+            onChangeText={(text) => setPassword(text)}
+            secureTextEntry
+          ></TextInput>
         </View>
-        <View style={styles.loginSection}>
-
-          <View style={styles.userConnectionInputs}>
-            <TextInput
-                placeholder='Email'
-                style={styles.userInfoInput}
-            >
-            </TextInput>
-            <TextInput
-                placeholder='Password'
-                style={styles.userInfoInput}
-            >
-            </TextInput>
-          </View>
-          <TouchableOpacity
-              style={styles.userSubmitButton}
-          >
-            <Text style={styles.userSubmitButtonText}>Login</Text>
-          </TouchableOpacity>
-          <TouchableOpacity
-              style={styles.onlyTextButton}
-          >
-            <Text style={[styles.onlyTextButtonText, styles.shadowText]}>forgot password?</Text>
-          </TouchableOpacity>
-          <View
-              style={styles.beforeFooterTextContainer}
-          >
+        <View style={styles.buttonsContainer}>
+          <TouchableOpacity style={styles.userSubmitButtonSignUp}>
             <Text
-                style={[styles.beforeFooterText, styles.shadowText]}
+              style={styles.userSubmitButtonTextSignUp}
+              onPress={() => {
+                navigation.navigate('Signup');
+              }}
             >
-              Or sign up with
+              Sign up
             </Text>
-          </View>
+          </TouchableOpacity>
+          <TouchableOpacity style={styles.userSubmitButtonLogIn}>
+            <Text
+              style={styles.userSubmitButtonTextLogIn}
+              onPress={() => {
+                handleLogin(email, password);
+              }}
+            >
+              Log in
+            </Text>
+          </TouchableOpacity>
         </View>
         <View style={styles.loginFooter}>
-          <Icon
-              style={styles.loginIcon}
-              name='google'
-              color='red'
-          />
-          <Icon
-              style={styles.loginIcon}
-              name='facebook-square'
-              color='blue'
-          />
-          <Icon
-              style={styles.loginIcon}
-              name='instagram'
-              color='purple'
-          />
+          <View style={styles.logInForgot}>
+            <TouchableOpacity>
+              <Text
+                style={styles.forgotTextButtonText}
+                onPress={() => {
+                  navigation.navigate('ForgotPassword');
+                }}
+              >
+                I forgot my password
+              </Text>
+            </TouchableOpacity>
+            <Text style={styles.orLoginTextButtonText}>or log in with </Text>
+          </View>
+          <View>
+            <View style={styles.logInIcons}>
+              <TouchableOpacity>
+                <Icon style={styles.loginIcon} name='google' />
+              </TouchableOpacity>
+              <TouchableOpacity>
+                <Icon style={styles.loginIcon} name='facebook-square' />
+              </TouchableOpacity>
+              <TouchableOpacity>
+                <Icon style={styles.loginIcon} name='instagram' />
+              </TouchableOpacity>
+            </View>
+          </View>
         </View>
       </View>
-  )
-};
-
-export default LoginScreen;
+    </View>
+  );
+}

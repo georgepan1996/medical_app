@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import { NavigationContainer } from '@react-navigation/native';
 import { auth } from './firebase';
 import { AdminProvider } from './src/contexts/AdminContext';

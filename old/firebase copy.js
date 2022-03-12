@@ -21,11 +21,34 @@ export const auth = firebase.auth();
 
 export const db = firebase.firestore();
 
+// const currentUser = firebase.auth().currentUser;
+
+// let id;
+let data = {
+  email: 'email',
+  isAdmin: false,
+  password: 'password',
+  userName: 'userName',
+    roleId: 0
+};
+
+let roleData = {
+    roleName: 'role',
+    perms: '',
+    roleId: 0
+}
+
+// const useruUid = currentUser.uid;
+
+// const userUid = () => {
+//   return currentUser.uid;
+// };
+
 const handleSignOut = () => {
   auth.signOut().catch((error) => alert(error.message));
 };
 
-const handleSignUp = (userName, email, password, doctorId = 'none') => {
+const handleSignUp = (userName, email, password) => {
   auth
     .createUserWithEmailAndPassword(email, password)
     .then((userCredentials) => {
@@ -38,17 +61,12 @@ const handleSignUp = (userName, email, password, doctorId = 'none') => {
         userName,
         email,
         password,
-        doctorId,
-        roleId: 0,
+          roleid: 3, //id of simple user role
         isAdmin: false,
-        isVerified: false,
       });
+
     })
     .catch((error) => alert(error.message));
-
-  firebase.auth().onAuthStateChanged(function (user) {
-    user.sendEmailVerification();
-  });
 };
 
 function fetchUserData(id) {
@@ -58,6 +76,10 @@ function fetchUserData(id) {
     .then((doc) => {
       if (doc.exists) {
         data = doc.data();
+        // data.email = docData.email;
+        // data.isAdmin = docData.isAdmin;
+        // data.password = docData.password;
+        // data.userName = docData.userName;
       } else {
         console.log('No such document!');
       }
@@ -68,21 +90,21 @@ function fetchUserData(id) {
 }
 
 function fetchRolesData(roleId) {
-  const docRef = db.collection('roles').where('roleId', '==', roleId);
-  console.log('roleId', roleId);
-  console.log('docRef', docRef);
-  docRef
-    .get()
-    .then((queryResult) => {
-      queryResult.forEach((doc) => {
-        // doc.data() is never undefined for query doc snapshots
-        roleData = doc.data();
-        console.log('roleData', roleData);
-      });
-    })
-    .catch((error) => {
-      console.log('Error getting document:', error);
-    });
+    const docRef = db.collection('roles').where('roleId', '==', roleId)
+    console.log('roleId', roleId)
+    console.log('docRef', docRef)
+    docRef
+        .get()
+        .then((queryResult) => {
+            queryResult.forEach((doc) => {
+                // doc.data() is never undefined for query doc snapshots
+                roleData = doc.data();
+                console.log('roleData', roleData)
+            });
+        })
+        .catch((error) => {
+            console.log('Error getting document:', error);
+        });
 }
 
 const handleLogin = (email, password) => {
@@ -90,16 +112,16 @@ const handleLogin = (email, password) => {
   auth
     .signInWithEmailAndPassword(email, password)
     .then((userCredentials) => {
+
       const currentUser = firebase.auth().currentUser;
       const user = userCredentials.user;
       uid = currentUser.uid;
-      const ver = currentUser.emailVerified;
 
       fetchUserData(currentUser.uid);
-
-      console.log('Logged in with:', currentUser.email, ' Verified:', ver);
+ 
+      console.log('Logged in with:', currentUser.email);
     })
     .catch((error) => alert(error.message));
 };
 
-export { handleSignUp, handleLogin, handleSignOut, fetchRolesData };
+export { handleSignUp, handleLogin, handleSignOut, fetchRolesData, roleData, data };

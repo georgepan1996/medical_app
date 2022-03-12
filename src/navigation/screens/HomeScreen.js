@@ -5,6 +5,7 @@ import styles from '../../styles/Styles';
 
 const HomeScreen = () => {
   const [data, setData] = useState([]);
+  const [verifiedUser, setVerifiedUser] = useState([]);
   const [perms, setPerms] = useState([]);
   const [loading, setLoading] = useState(true);
 
@@ -40,7 +41,9 @@ const HomeScreen = () => {
           textStyle={styles.spinnerTextStyle}
         />
       ) : (
-        <Text>Email: {data.email}</Text>
+        <Text>
+          Email: {data.email} - Verified: {data.isVerified ? 'true' : 'false'}
+        </Text>
       )}
       {data.roleId === 1 ? <Text>Admin text</Text> : null}
       {Object.entries(perms).map(([key, v]) => {

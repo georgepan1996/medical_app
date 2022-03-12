@@ -1,0 +1,26 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="465" height="390.105" viewBox="0 0 465 390.105">
+  <defs>
+    <filter id="Subtraction_15" x="0" y="195" width="457" height="195.105" filterUnits="userSpaceOnUse">
+      <feOffset dx="-4" dy="3" input="SourceAlpha"/>
+      <feGaussianBlur stdDeviation="1.5" result="blur"/>
+      <feFlood flood-opacity="0.161"/>
+      <feComposite operator="in" in2="blur"/>
+      <feComposite in="SourceGraphic"/>
+    </filter>
+    <filter id="Subtraction_17" x="3.001" y="0" width="461.999" height="379.47" filterUnits="userSpaceOnUse">
+      <feOffset dx="4" dy="3" input="SourceAlpha"/>
+      <feGaussianBlur stdDeviation="1.5" result="blur-2"/>
+      <feFlood flood-opacity="0.161"/>
+      <feComposite operator="in" in2="blur-2"/>
+      <feComposite in="SourceGraphic"/>
+    </filter>
+  </defs>
+  <g id="Group_15" data-name="Group 15" transform="translate(-490 1646)">
+    <g transform="matrix(1, 0, 0, 1, 490, -1646)" filter="url(#Subtraction_15)">
+      <path id="Subtraction_15-2" data-name="Subtraction 15" d="M515.341,758.605h0c-1.268,0-2.54-.031-3.779-.092-23.435-1.146-76.34-21.351-157.245-60.054C286.037,665.8,211.775,626.606,161.5,599.48V572.5h448V716.878c-15.7,12.379-30.974,22.165-45.4,29.086a142.117,142.117,0,0,1-24.335,9.2A94.389,94.389,0,0,1,515.341,758.605Z" transform="translate(-153 -376)" fill="#7fadef"/>
+    </g>
+    <g transform="matrix(1, 0, 0, 1, 490, -1646)" filter="url(#Subtraction_17)">
+      <path id="Subtraction_17-2" data-name="Subtraction 17" d="M193.342,502.97c-9.614,0-25.195-3-46.309-8.917-16.431-4.6-36.124-10.943-58.532-18.84V132.5h453V357h-1.542v97a181.764,181.764,0,0,0-24.141-8.081,281.067,281.067,0,0,0-27.988-6.016,305,305,0,0,0-36.657-3.7c-2.732-.11-5.541-.166-8.348-.166a254.188,254.188,0,0,0-36.636,2.806c-10.173,1.491-20.61,3.568-31.022,6.175A278.126,278.126,0,0,0,345.645,454c-.047.027-5.505,3.072-14.717,7.652-8.423,4.188-21.717,10.507-37.22,16.833a411.06,411.06,0,0,1-49.327,16.833C225.243,500.4,208.071,502.97,193.342,502.97Z" transform="translate(-85 -131)" fill="#5091ee"/>
+    </g>
+  </g>
+</svg>
