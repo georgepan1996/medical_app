@@ -3,10 +3,10 @@ import { useNavigation } from '@react-navigation/core';
 import { View, Text, TextInput, TouchableOpacity } from 'react-native';
 import SVGComponent from '../../../assets/svgs/loginScreen/TopSvgBlueSignUp';
 import styles from '../../styles/StylesLogInScreen';
+import { handleForgotPassword } from '../../../firebase';
 
 export default function ScreenOne() {
   const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
   const navigation = useNavigation();
 
   return (
@@ -40,7 +40,7 @@ export default function ScreenOne() {
             <Text
               style={styles.userSubmitButtonTextLogIn}
               onPress={() => {
-                handleLogin(email, password);
+                handleForgotPassword(email), navigation.navigate('Login');
               }}
             >
               Reset

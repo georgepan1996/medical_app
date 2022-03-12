@@ -102,4 +102,21 @@ const handleLogin = (email, password) => {
     .catch((error) => alert(error.message));
 };
 
-export { handleSignUp, handleLogin, handleSignOut, fetchRolesData };
+const handleForgotPassword = (email) => {
+  auth
+    .sendPasswordResetEmail(email)
+    .then(console.log('forgotten password email sent'))
+    .catch((error) => alert(error.message));
+  // - Set a message through context with info about the
+  // proceess and the next steps.
+  // - First run the validators, set a message if any and
+  // then navigate to the login page.
+};
+
+export {
+  handleSignUp,
+  handleLogin,
+  handleSignOut,
+  fetchRolesData,
+  handleForgotPassword,
+};
