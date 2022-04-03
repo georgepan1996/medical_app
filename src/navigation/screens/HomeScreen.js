@@ -1,9 +1,19 @@
 import React, { useEffect, useState } from 'react';
-import { Text, TouchableOpacity, View, ActivityIndicator } from 'react-native';
+import {
+  Text,
+  TouchableOpacity,
+  View,
+  ActivityIndicator,
+  Button,
+} from 'react-native';
 import { auth, db, handleSignOut } from '../../../firebase';
 import styles from '../../styles/Styles';
 
-const HomeScreen = () => {
+import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
+import { addFriend } from '../../../redux/actions/ModalActions';
+
+const HomeScreen = (props) => {
   const [data, setData] = useState([]);
   const [verifiedUser, setVerifiedUser] = useState([]);
   const [perms, setPerms] = useState([]);
@@ -45,6 +55,17 @@ const HomeScreen = () => {
           Email: {data.email} - Verified: {data.isVerified ? 'true' : 'false'}
         </Text>
       )}
+      <Text>Add friends here!</Text>
+
+      {props.friends.possible.map((friend, index) => (
+        <Button
+          key={friend}
+          title={`Add ${friend}`}
+          onPress={() => props.addFriend(index)}
+        />
+      ))}
+      <Text>{props.friends.current.length}</Text>
+
       {data.roleId === 1 ? <Text>Admin text</Text> : null}
       {Object.entries(perms).map(([key, v]) => {
         return (
@@ -60,4 +81,17 @@ const HomeScreen = () => {
   );
 };
 
-export default HomeScreen;
+const mapStateToProps = (state) => {
+  const { friends } = state;
+  return { friends };
+};
+
+const mapDispatchToProps = (dispatch) =>
+  bindActionCreators(
+    {
+      addFriend,
+    },
+    dispatch
+  );
+
+export default connect(mapStateToProps, mapDispatchToProps)(HomeScreen);

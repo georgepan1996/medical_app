@@ -3,28 +3,30 @@ import { useNavigation } from '@react-navigation/core';
 import { View, Text, TextInput, TouchableOpacity } from 'react-native';
 import SVGComponent from '../../../assets/svgs/loginScreen/TopSvgBlueSignUp';
 import styles from '../../styles/StylesLogInScreen';
-import { handleForgotPassword } from '../../../firebase';
 import ConfirmModal from '../../components/ConfirmModal';
 
 export default function ScreenOne() {
   const [email, setEmail] = useState('');
   const navigation = useNavigation();
-  const [modalVisible, setModalVisible] = useState(false);
-  const [modalText, setModalText] = useState();
+  const [modalVisible, setModalVisible] = useState(null);
+  const [modalText, setModalText] = useState('Comfirm');
+  const [modalComfirmText, setModalComfirmText] = useState('ok');
   const [emailToSendIsOk, setEmailToSendIsOk] = useState(false);
 
   const modalTextSetter = (email) => {
     if (email.length <= 5) {
       setModalText('Please enter a valid email');
+      setModalComfirmText('Try again');
     } else if (email.length > 5) {
       setModalText(
         'An email has been sent to reset your password. Please check your inbox.'
       );
+      setModalComfirmText('Ok, back to Login');
       setEmailToSendIsOk(true);
     }
   };
   function closeModal() {
-    setModalVisible(!modalVisible);
+    setModalVisible(false);
   }
 
   return (
@@ -62,7 +64,7 @@ export default function ScreenOne() {
               keyboardType='email-address'
               autoCorrect={false}
               onPress={() => {
-                modalTextSetter(email), setModalVisible(!modalVisible);
+                modalTextSetter(email), setModalVisible(true);
               }}
             >
               Reset
@@ -74,6 +76,7 @@ export default function ScreenOne() {
         children
         visible={modalVisible}
         email={email}
+        modalComfirmText={modalComfirmText}
         emailToSendIsOk={emailToSendIsOk}
         closeModal={closeModal}
       >

@@ -9,6 +9,7 @@ const ConfirmModal = ({
   email,
   emailToSendIsOk,
   closeModal,
+  modalComfirmText,
 }) => {
   const navigation = useNavigation();
 
@@ -28,7 +29,7 @@ const ConfirmModal = ({
                   : closeModal();
               }}
             >
-              <Text style={styles.textStyle}>Ok, log in</Text>
+              <Text style={styles.textStyle}>{modalComfirmText}</Text>
             </Pressable>
           </View>
         </View>
