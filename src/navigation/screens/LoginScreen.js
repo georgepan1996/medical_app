@@ -6,7 +6,7 @@ import SVGComponent from '../../../assets/svgs/loginScreen/TopSvgBlue.js';
 import styles from '../../styles/StylesLogInScreen';
 import { handleLogin } from '../../../firebase';
 
-export default function ScreenOne() {
+function LoginScreen() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const navigation = useNavigation();
@@ -91,3 +91,5 @@ export default function ScreenOne() {
     </View>
   );
 }
+
+export default LoginScreen;
