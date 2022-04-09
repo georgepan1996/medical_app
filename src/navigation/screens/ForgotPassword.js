@@ -30,7 +30,7 @@ export default function ScreenOne() {
   }
 
   return (
-    <View style={styles.container}>
+    <View style={styles.container} keyboardShouldPersistTaps={'always'}>
       <View style={styles.topHeaderSignUp} />
       <SVGComponent style={styles.svgg} />
       <View style={styles.headerContainer}>

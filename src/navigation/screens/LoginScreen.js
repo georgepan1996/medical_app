@@ -12,7 +12,7 @@ function LoginScreen() {
   const navigation = useNavigation();
 
   return (
-    <View style={styles.container}>
+    <View style={styles.container} keyboardShouldPersistTaps={'always'}>
       <View style={styles.topHeader} />
       <SVGComponent style={styles.svgg} />
       <View style={styles.headerContainer}>
