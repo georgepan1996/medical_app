@@ -82,7 +82,6 @@ const HomeScreen = () => {
                     </Icon.Feather>
                 </View>
             </View>
-
             <View style={HomeScreenStyles.section}>
                 <View style={HomeScreenStyles.sectionData}>
 
