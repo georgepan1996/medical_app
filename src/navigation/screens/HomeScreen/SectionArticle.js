@@ -1,20 +1,33 @@
 import React, {useEffect, useState} from 'react';
-import {Text, View, Image} from 'react-native';
+import {Text, View, Image, TouchableOpacity} from 'react-native';
 import HomeScreenStyles from "../../../styles/HomeScreenStyles";
+import {removeArticle} from "../../../redux/slices/articlesSlice";
+import {useDispatch} from "react-redux";
 
 
-const SectionArticle = (props) => {
+const SectionArticle = (article) => {
+    console.log('removeArticle', removeArticle)
+    const dispatch = useDispatch()
+    const deleteArticle = (id) => {
+            console.log('deleting article id', id)
+            dispatch(removeArticle({id}))
+    }
     return (
-        <View style={HomeScreenStyles.sectionArticle}>
-            <Image
-                style={HomeScreenStyles.articleImage}
-                source={{uri: props.imageUrl}}
-            />
-            <View style={HomeScreenStyles.articleDescription}>
-                <Text style={HomeScreenStyles.articleTitle}>{props.title} </Text>
-                <Text style={HomeScreenStyles.articleContent}>{props.content} </Text>
+        <TouchableOpacity onPress={() => {
+            console.log('article', article.id)
+            deleteArticle(article.id)
+        }}>
+            <View style={HomeScreenStyles.sectionArticle}>
+                <Image
+                    style={HomeScreenStyles.articleImage}
+                    source={{uri: article.imageUrl}}
+                />
+                <View style={HomeScreenStyles.articleDescription}>
+                    <Text style={HomeScreenStyles.articleTitle}>{article.title} </Text>
+                    <Text style={HomeScreenStyles.articleContent}>{article.content} </Text>
+                </View>
             </View>
-        </View>
+        </TouchableOpacity>
     )
 }
 

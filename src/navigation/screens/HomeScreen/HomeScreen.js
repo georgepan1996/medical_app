@@ -5,6 +5,8 @@ import HomeScreenStyles from "../../../styles/HomeScreenStyles";
 import Icon from '../../../styles/icons';
 import SectionDataContentItem from "./SectionDataContentItem";
 import SectionArticle from "./SectionArticle";
+import {useSelector} from "react-redux";
+import {selectArticles} from "../../../redux/slices/articlesSlice";
 
 
 //theme
@@ -24,8 +26,12 @@ const profileIconText = 'Profile'
 
 //other comments
     //article must have a limit of characters for title and description
+    //validate article params
 
 const HomeScreen = () => {
+    //section vars
+    const articlesList = useSelector(selectArticles)
+    console.log('articlesList', articlesList)
     const [data, setData] = useState([]);
     const [perms, setPerms] = useState([]);
     const [loading, setLoading] = useState(true);
@@ -111,49 +117,21 @@ const HomeScreen = () => {
                 </View>
 
                 <ScrollView style={HomeScreenStyles.sectionArticles}>
-                    <SectionArticle
-                        imageUrl={'https://hips.hearstapps.com/hmg-prod.s3.amazonaws.com/' +
-                        'images/skincare-1588698347.png?crop=1.00xw:0.752xh;0,0.175xh&resize=1200:*'}
-                        title={'Skin care and lotions'}
-                        content={'Skin care and lotions dsv  ffdscf  hdfoiu'}
-                    >
-                    </SectionArticle>
-                    <SectionArticle
-                        imageUrl={'https://hips.hearstapps.com/hmg-prod.s3.amazonaws.com/' +
-                        'images/skincare-1588698347.png?crop=1.00xw:0.752xh;0,0.175xh&resize=1200:*'}
-                        title={'Skin care and lotions'}
-                        content={'Skin care and lotions ds  ffdsfs dfsdfsdfsd'}
-                    >
-                    </SectionArticle>
-                    <SectionArticle
-                        imageUrl={'https://hips.hearstapps.com/hmg-prod.s3.amazonaws.com/' +
-                        'images/skincare-1588698347.png?crop=1.00xw:0.752xh;0,0.175xh&resize=1200:*'}
-                        title={'Skin care and lotions'}
-                        content={'Skin care and lotions dsf fds fsdfsd  sfsdfsd'}
-                    >
-                    </SectionArticle>
-                    <SectionArticle
-                        imageUrl={'https://hips.hearstapps.com/hmg-prod.s3.amazonaws.com/' +
-                        'images/skincare-1588698347.png?crop=1.00xw:0.752xh;0,0.175xh&resize=1200:*'}
-                        title={'Skin care and lotions'}
-                        content={'Skin care and lotions dsf fds fsdfsd  sfsdfsd'}
-                    >
-                    </SectionArticle>
-                    <SectionArticle
-                        imageUrl={'https://hips.hearstapps.com/hmg-prod.s3.amazonaws.com/' +
-                        'images/skincare-1588698347.png?crop=1.00xw:0.752xh;0,0.175xh&resize=1200:*'}
-                        title={'Skin care and lotions'}
-                        content={'Skin care and lotions dsf fds fsdfsd  sfsdfsd'}
-                    >
-                    </SectionArticle>
-                    <SectionArticle
-                        imageUrl={'https://hips.hearstapps.com/hmg-prod.s3.amazonaws.com/' +
-                        'images/skincare-1588698347.png?crop=1.00xw:0.752xh;0,0.175xh&resize=1200:*'}
-                        title={'Skin care and lotions'}
-                        content={'Skin care and lotions dsf fds fsdfsd  sfsdfsd'}
-                    >
-                    </SectionArticle>
+                    {
+                        articlesList.map(article => (
+
+                            <SectionArticle
+                                key={article.id.toString()}
+                                id={article.id}
+                                imageUrl={article.imageUrl}
+                                title={article.title}
+                                content={article.content}
+                            >
+                            </SectionArticle>
+                        ))
+                    }
                 </ScrollView>
+
             </View>
             <View style={[HomeScreenStyles.footer, HomeScreenStyles.bar]}>
                 <View
