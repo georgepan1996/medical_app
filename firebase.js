@@ -17,9 +17,9 @@ if (firebase.apps.length === 0) {
   app = firebase.app();
 }
 
-export const auth = firebase.auth();
+const auth = firebase.auth();
 
-export const db = firebase.firestore();
+const db = firebase.firestore();
 
 // const currentUser = firebase.auth().currentUser;
 
@@ -107,21 +107,27 @@ function fetchRolesData(roleId) {
         });
 }
 
+// const handleLogin = (email, password) => {
+//     let uid;
+//     return auth
+//         .signInWithEmailAndPassword(email, password)
+//         .then((userCredentials) => {
+//
+//             const currentUser = firebase.auth().currentUser;
+//             const user = userCredentials.user;
+//             uid = currentUser.uid;
+//
+//             fetchUserData(currentUser.uid);
+//
+//             console.log('Logged in with:', currentUser.email);
+//         })
+//         .catch((error) => alert(error.message));
+// };
+
 const handleLogin = (email, password) => {
-  let uid;
-  auth
+  return auth
     .signInWithEmailAndPassword(email, password)
-    .then((userCredentials) => {
 
-      const currentUser = firebase.auth().currentUser;
-      const user = userCredentials.user;
-      uid = currentUser.uid;
-
-      fetchUserData(currentUser.uid);
- 
-      console.log('Logged in with:', currentUser.email);
-    })
-    .catch((error) => alert(error.message));
 };
 
-export { handleSignUp, handleLogin, handleSignOut, fetchRolesData, roleData, data };
+export { auth, db, handleSignUp, handleLogin, handleSignOut, fetchRolesData, roleData, data };

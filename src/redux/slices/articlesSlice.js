@@ -1,43 +1,15 @@
 import {createSlice} from "@reduxjs/toolkit";
+import {db} from '../../../firebase'
 
 const initialState = {
     homeScreenArticles: [
-        {
-            id: 1,
-            imageUrl:  'https://hips.hearstapps.com/hmg-prod.s3.amazonaws.com/' +
-                'images/skincare-1588698347.png?crop=1.00xw:0.752xh;0,0.175xh&resize=1200:*',
-            title: 'Skin care and lotions',
-            content: 'Skin care and lotions dsv  ffdscf  hdfoiu'
-        },
-        {
-            id: 2,
-            imageUrl:  'https://hips.hearstapps.com/hmg-prod.s3.amazonaws.com/' +
-                'images/skincare-1588698347.png?crop=1.00xw:0.752xh;0,0.175xh&resize=1200:*',
-            title: 'Skin care and lotions',
-            content: 'Skin care and lotions dsv  ffdscf  hdfoiu'
-        },
-        {
-            id: 3,
-            imageUrl:  'https://hips.hearstapps.com/hmg-prod.s3.amazonaws.com/' +
-                'images/skincare-1588698347.png?crop=1.00xw:0.752xh;0,0.175xh&resize=1200:*',
-            title: 'Skin care and lotions',
-            content: 'Skin care and lotions dsv  ffdscf  hdfoiu'
-        },
-        {
-            id: 4,
-            imageUrl:  'https://hips.hearstapps.com/hmg-prod.s3.amazonaws.com/' +
-                'images/skincare-1588698347.png?crop=1.00xw:0.752xh;0,0.175xh&resize=1200:*',
-            title: 'Skin care and lotions',
-            content: 'Skin care and lotions dsv  ffdscf  hdfoiu'
-        },
-        {
-            id: 5,
-            imageUrl:  'https://hips.hearstapps.com/hmg-prod.s3.amazonaws.com/' +
-                'images/skincare-1588698347.png?crop=1.00xw:0.752xh;0,0.175xh&resize=1200:*',
-            title: 'Skin care and lotions',
-            content: 'Skin care and lotions dsv  ffdscf  hdfoiu'
-        }
     ]
+}
+
+const getArticles = () => {
+    console.log('get articles')
+    const articlesRef = db.collection('posts')
+    return articlesRef.get()
 }
 
 const articles = createSlice({
@@ -48,10 +20,14 @@ const articles = createSlice({
             let articleIndex = state.homeScreenArticles.findIndex(article => article.id === action.payload.id)
             console.log('articleIndex', articleIndex)
             console.log('removed',  state.homeScreenArticles.splice(articleIndex, 1))
+        },
+        addHomeScreenArticles: (state, action) => {
+            state.homeScreenArticles.push(...action.payload.articles)
         }
     }
 })
 
 export const selectArticles = state => state.articles.homeScreenArticles
-export const { removeArticle } = articles.actions
+export const { removeArticle, addHomeScreenArticles } = articles.actions
+export { getArticles }
 export default articles.reducer

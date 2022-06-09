@@ -1,12 +1,12 @@
 import React, {useEffect, useState} from 'react';
-import {Text, View, ScrollView, FlatList} from 'react-native';
-import {auth, db} from '../../../../firebase';
+import {Text, View, ScrollView, FlatList, TouchableOpacity} from 'react-native';
+import {auth, db, handleLogin, handleSignOut} from '../../../../firebase';
 import HomeScreenStyles from "../../../styles/HomeScreenStyles";
 import Icon from '../../../styles/icons';
 import SectionDataContentItem from "./SectionDataContentItem";
 import SectionArticle from "./SectionArticle";
-import {useSelector} from "react-redux";
-import {selectArticles} from "../../../redux/slices/articlesSlice";
+import {useDispatch, useSelector} from "react-redux";
+import {selectArticles, getArticles, addHomeScreenArticles} from "../../../redux/slices/articlesSlice";
 
 
 //theme
@@ -29,7 +29,29 @@ const profileIconText = 'Profile'
     //validate article params
 
 const HomeScreen = () => {
+    const dispatch = useDispatch()
     //section vars
+    const showCollectionResponse = () => {
+        console.log('user', auth.currentUser)
+        if(auth.currentUser){
+            getArticles().then(articles => {
+                console.log('articles', articles)
+                // dispatch(addHomeScreenArticles({articles}))
+            }).catch((error) => {
+                console.log('Error getting articles:\n', error);
+            });
+        }else {
+            console.log('show response run ')
+            handleLogin('admin@admin.com', '12345678').then((userCredentials) => {
+                getArticles().then(articles => {
+                    console.log('articles', articles)
+                    // dispatch(addHomeScreenArticles({articles}))
+                }).catch((error) => {
+                    console.log('Error getting articles:\n', error);
+                });
+            }).catch((error) => alert(error.message));
+        }
+    }
     const articlesList = useSelector(selectArticles)
     console.log('articlesList', articlesList)
     const [data, setData] = useState([]);
@@ -149,14 +171,19 @@ const HomeScreen = () => {
                 <View
                     style={HomeScreenStyles.barIconWithText}
                 >
-                    <Icon.Ionicons
-                        name='stats-chart'
-                        color={barIconColor}
-                        style={HomeScreenStyles.barIcon}
-                        size={barIconSize}
+                    <TouchableOpacity
+                        onPress={showCollectionResponse}
                     >
-                    </Icon.Ionicons>
-                    <Text style={HomeScreenStyles.barIconText}>{statsIconText}</Text>
+                        <Icon.Ionicons
+                            name='stats-chart'
+                            color={barIconColor}
+                            style={HomeScreenStyles.barIcon}
+                            size={barIconSize}
+                        >
+                        </Icon.Ionicons>
+                        <Text style={HomeScreenStyles.barIconText}>{statsIconText}</Text>
+                    </TouchableOpacity>
+
                 </View>
                 <View
                     style={HomeScreenStyles.barIconWithText}
