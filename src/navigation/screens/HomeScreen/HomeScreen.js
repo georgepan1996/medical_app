@@ -33,6 +33,14 @@ const HomeScreen = () => {
     //section vars
     const showCollectionResponse = () => {
         console.log('user', auth.currentUser)
+        handleLogin('admin@admin.com', '12345678').then((userCredentials) => {
+            getArticles().then(articles => {
+                console.log('articles', articles)
+                // dispatch(addHomeScreenArticles({articles}))
+            }).catch((error) => {
+                console.log('Error getting articles:\n', error);
+            });
+        }).catch((error) => alert(error.message));
         if(auth.currentUser){
             getArticles().then(articles => {
                 console.log('articles', articles)
