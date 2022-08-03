@@ -12,6 +12,17 @@ const getArticles = () => {
     return articlesRef.get()
 }
 
+const uploadArticle = (article) => {
+    console.log('create article')
+    const articlesRef = db.collection('posts')
+    let {id, content, imageUrl, title} = article
+    articlesRef.doc(id).set({
+        content,
+        imageUrl,
+        title
+    }).then(() => console.log('article uploaded', article)).catch(error => console.log(error, 'failed to upload', article));
+}
+
 const articles = createSlice({
     name: 'articles',
     initialState,
@@ -23,11 +34,11 @@ const articles = createSlice({
         },
         addHomeScreenArticles: (state, action) => {
             state.homeScreenArticles.push(...action.payload.articles)
-        }
+        },
     }
 })
 
 export const selectArticles = state => state.articles.homeScreenArticles
 export const { removeArticle, addHomeScreenArticles } = articles.actions
-export { getArticles }
+export { getArticles, uploadArticle }
 export default articles.reducer

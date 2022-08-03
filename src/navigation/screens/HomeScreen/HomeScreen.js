@@ -6,7 +6,8 @@ import Icon from '../../../styles/icons';
 import SectionDataContentItem from "./SectionDataContentItem";
 import SectionArticle from "./SectionArticle";
 import {useDispatch, useSelector} from "react-redux";
-import {selectArticles, getArticles, addHomeScreenArticles} from "../../../redux/slices/articlesSlice";
+import {selectArticles, getArticles, addHomeScreenArticles, uploadArticle} from "../../../redux/slices/articlesSlice";
+import upload from "expo-cli/build/commands/upload";
 
 
 //theme
@@ -31,34 +32,47 @@ const profileIconText = 'Profile'
 const HomeScreen = () => {
     const dispatch = useDispatch()
     //section vars
+    const createArticle = () => {
+        let article = {
+            id: 10,
+            content: 'uploaded article content',
+            imageUrl: 'https://l.facebook.com/l.php?u=https%3A%2F%2Fhips.hearstapps.com%2Fhmg-prod.s3.amazonaws.com%2Fimages%2Fskincare-1588698347.png%3Fcrop%3D1.00xw%253A0.752xh%253B0%252C0.175xh%26resize%3D1200%26fbclid%3DIwAR0Xvg47IfzOyCsTZXNn6YERifI2CgzcSu-2xtn0FAP0ZK2YJalcWh3W0yI&h=AT0LvEsMhwhq5ZPb_IJ-7EfuDMwQ2AUDVfU7pEFgd_ItUXU-irXjcVklKwJpfUv7ZcLu10ozoPzg7N8pytCpzhjHh-JM7pUv75hr7oK5WbeVdPUF-nAjT5TgWt9-FZ36HdVGgg',
+            title: 'uploaded article title'
+        }
+        console.log('article to create', article)
+        uploadArticle(article)
+    }
+
     const showCollectionResponse = () => {
         console.log('user', auth.currentUser)
-        handleLogin('admin@admin.com', '12345678').then((userCredentials) => {
-            getArticles().then(articles => {
+        handleLogin('giwrgos@giwrgos.com', '12345678').then((userCredentials) => {
+            getArticles().then(snapshot => {
+                let articles = []
+                snapshot.forEach(doc => {
+                    console.log(doc.data())
+                    articles.push(doc.data())
+                })
                 console.log('articles', articles)
-                // dispatch(addHomeScreenArticles({articles}))
+                dispatch(addHomeScreenArticles({articles}))
             }).catch((error) => {
                 console.log('Error getting articles:\n', error);
             });
         }).catch((error) => alert(error.message));
-        if(auth.currentUser){
-            getArticles().then(articles => {
-                console.log('articles', articles)
-                // dispatch(addHomeScreenArticles({articles}))
-            }).catch((error) => {
-                console.log('Error getting articles:\n', error);
-            });
-        }else {
-            console.log('show response run ')
-            handleLogin('admin@admin.com', '12345678').then((userCredentials) => {
-                getArticles().then(articles => {
-                    console.log('articles', articles)
-                    // dispatch(addHomeScreenArticles({articles}))
-                }).catch((error) => {
-                    console.log('Error getting articles:\n', error);
-                });
-            }).catch((error) => alert(error.message));
-        }
+        // if(auth.currentUser){
+        //     getArticles().then(articles => {
+        //         console.log('articles', articles)
+        //         articles.forEach(article => {
+        //             console.log(article.data())
+        //         })
+        //         // dispatch(addHomeScreenArticles({articles}))
+        //     }).catch((error) => {
+        //         console.log('Error getting articles:\n', error);
+        //     });
+        //     console.log('was logged in')
+        // }else {
+        //
+        //     console.log('was not logged in')
+        // }
     }
     const articlesList = useSelector(selectArticles)
     console.log('articlesList', articlesList)
@@ -196,14 +210,19 @@ const HomeScreen = () => {
                 <View
                     style={HomeScreenStyles.barIconWithText}
                 >
-                    <Icon.Feather
-                        name='plus-circle'
-                        color={barIconColor}
-                        style={HomeScreenStyles.barIcon}
-                        size={barIconSize}
+                    <TouchableOpacity
+                        onPress={createArticle}
                     >
-                    </Icon.Feather>
-                    <Text style={HomeScreenStyles.barIconText}>{newIconText}</Text>
+                        <Icon.Feather
+                            name='plus-circle'
+                            color={barIconColor}
+                            style={HomeScreenStyles.barIcon}
+                            size={barIconSize}
+                        >
+                        </Icon.Feather>
+                        <Text style={HomeScreenStyles.barIconText}>{newIconText}</Text>
+                    </TouchableOpacity>
+
                 </View>
 
                 <View
